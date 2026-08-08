@@ -1,20 +1,26 @@
 class Solution {
-    public int pivotIndex(int[] nums) {
-        int totalSum = 0;
-        int leftSum = 0;
-        for (int num : nums) {
-            totalSum += num;
-        }
- 
-        for (int i = 0; i < nums.length; i++) {
-           
-            if (leftSum == totalSum - leftSum - nums[i]) {
-                return i;
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        
+        int left = 0;
+        int right = n - 1;
+        int index = n - 1;
+        
+        while (left <= right) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+            
+            if (leftSquare > rightSquare) {
+                result[index] = leftSquare;
+                left++;
+            } else {
+                result[index] = rightSquare;
+                right--;
             }
-       
-            leftSum += nums[i];
+            index--;
         }
         
-        return -1;
+        return result;
     }
 }
