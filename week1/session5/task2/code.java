@@ -1,14 +1,20 @@
 class Solution {
-    public int[] shuffle(int[] nums, int n) {
-        int[] result = new int[2 * n];
-        
-        for (int i = 0; i < n; i++) {
-            // Place x_i at the even index
-            result[2 * i] = nums[i];
-            // Place y_i at the odd index
-            result[2 * i + 1] = nums[i + n];
+    public int pivotIndex(int[] nums) {
+        int totalSum = 0;
+        int leftSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+ 
+        for (int i = 0; i < nums.length; i++) {
+           
+            if (leftSum == totalSum - leftSum - nums[i]) {
+                return i;
+            }
+       
+            leftSum += nums[i];
         }
         
-        return result;
+        return -1;
     }
 }
